@@ -22,21 +22,13 @@ class _HomePageState extends State<HomePage> {
   Future getDocId() async {
     await FirebaseFirestore.instance
         .collection('users')
+        .orderBy('age', descending: true)
         .get()
-        // ignore: avoid_function_literals_in_foreach_calls
         .then((snapshot) => snapshot.docs.forEach((document) {
-              // ignore: avoid_print
               print(document.reference);
               docIDs.add(document.reference.id);
             }));
   }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   getDocId();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
